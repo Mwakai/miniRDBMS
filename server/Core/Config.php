@@ -1,7 +1,8 @@
 <?php
 
+namespace Core;
 
-Class Config
+class Config
 {
     private static $instance = null;
 

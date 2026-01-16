@@ -10,8 +10,12 @@ class Config
 
     private function __construct()
     {
+        // Use environment variable for storage path (for cloud hosting like Render)
+        // Falls back to local Storage directory
+        $storagePath = getenv('STORAGE_PATH') ?: __DIR__ . '/../Storage';
+
         $this->config = [
-            'storage_path' => __DIR__ . '/../Storage',
+            'storage_path' => $storagePath,
             'storage_format' => 'json',
             'debug_mode' => false,
             'max_query_time' => 5000,

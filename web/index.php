@@ -15,7 +15,7 @@
     <div class="container">
         <header>
             <h1>miniRDBMS</h1>
-            <p class="subtitle">Server: localhost » Database: miniRDBMS</p>
+            <p class="subtitle">Server:</p>
         </header>
 
         <div class="content">

@@ -1,0 +1,228 @@
+/**
+ * Documentation Page Styles - phpMyAdmin Style
+ */
+
+/* Docs Layout */
+.docs-layout {
+  grid-template-columns: 200px 1fr;
+}
+
+/* Docs Sidebar */
+.docs-sidebar {
+  position: sticky;
+  top: 10px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.docs-nav {
+  list-style: none;
+  margin: 0;
+  padding: 5px 0;
+  background: #f9f9f9;
+}
+
+.docs-nav li {
+  margin: 0;
+  padding: 0;
+}
+
+.docs-nav a {
+  display: block;
+  padding: 6px 12px;
+  color: #235a81;
+  text-decoration: none;
+  font-size: 12px;
+  border-left: 3px solid transparent;
+  transition: all 0.1s;
+}
+
+.docs-nav a:hover {
+  background: #cde4f6;
+  border-left-color: #235a81;
+}
+
+.docs-nav a.active {
+  background: #e8f4fc;
+  border-left-color: #235a81;
+  font-weight: bold;
+}
+
+/* Docs Content */
+.docs-content {
+  gap: 15px;
+}
+
+.docs-content .card {
+  scroll-margin-top: 20px;
+}
+
+.docs-content .card-body {
+  padding: 15px;
+}
+
+.docs-content .card-body h3 {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px 0 10px 0;
+  padding: 6px 10px;
+  background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+  border: 1px solid #ccc;
+  border-radius: 0;
+}
+
+.docs-content .card-body h3:first-child {
+  margin-top: 0;
+}
+
+.docs-content .card-body p {
+  font-size: 13px;
+  color: #333;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.docs-content .card-body ul {
+  margin: 10px 0;
+  padding-left: 25px;
+  font-size: 13px;
+}
+
+.docs-content .card-body li {
+  margin: 5px 0;
+  color: #333;
+}
+
+/* Code Blocks */
+.code-block {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  padding: 12px 15px;
+  margin: 10px 0;
+  overflow-x: auto;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.code-block code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Inline Code */
+.inline-code {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 1px 5px;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 12px;
+  color: #c7254e;
+}
+
+/* Tables in docs */
+.docs-content .results-table {
+  margin: 10px 0;
+}
+
+.docs-content .results-table td strong {
+  color: #235a81;
+}
+
+/* Flow Diagram */
+.flow-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.flow-item {
+  background: linear-gradient(to bottom, #fff, #f0f0f0);
+  border: 1px solid #aaa;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  min-width: 200px;
+}
+
+.flow-item .flow-desc {
+  font-weight: normal;
+  font-size: 11px;
+  color: #666;
+  display: block;
+  margin-top: 2px;
+}
+
+.flow-arrow {
+  font-size: 18px;
+  color: #666;
+  padding: 5px 0;
+}
+
+/* Message boxes in docs - adjust for lists */
+.docs-content .success-box ul,
+.docs-content .error-box ul,
+.docs-content .info-box ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.docs-content .success-box li,
+.docs-content .error-box li,
+.docs-content .info-box li {
+  margin: 3px 0;
+}
+
+.docs-content .success-box,
+.docs-content .error-box,
+.docs-content .info-box {
+  padding-left: 15px;
+}
+
+.docs-content .success-box::before,
+.docs-content .error-box::before,
+.docs-content .info-box::before {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .docs-sidebar {
+    position: static;
+    max-height: none;
+    order: -1;
+  }
+
+  .docs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+  }
+
+  .docs-nav a {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 5px 10px;
+    border-left-width: 1px;
+  }
+
+  .docs-nav a:hover {
+    border-left-width: 1px;
+  }
+}

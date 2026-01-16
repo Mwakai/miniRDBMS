@@ -1,0 +1,23 @@
+# Database data files (runtime data, not source code)
+server/Storage/tables/*.json
+
+# Keep the tables directory structure
+!server/Storage/tables/.gitkeep
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local

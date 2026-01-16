@@ -24,114 +24,337 @@ body {
   padding: 20px;
 }
 
-/* Header */
+/* Header - phpMyAdmin Style */
 header {
-  text-align: center;
-  color: black;
-  margin-bottom: 30px;
+  background: linear-gradient(to bottom, #4a6fa5, #3a5a8a);
+  color: white;
+  margin: -20px -20px 15px -20px;
+  padding: 0;
+  border-bottom: 1px solid #2d4a6a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 header h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 18px;
+  margin: 0;
+  padding: 8px 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header h1::before {
+  content: "🗄️";
+  font-size: 20px;
 }
 
 .subtitle {
-  font-size: 1.2em;
-  opacity: 0.9;
-  color: #000;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  padding-right: 15px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-right: 15px;
+}
+
+.header-nav a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.header-nav a:hover {
+  color: #fff;
+  text-decoration: underline;
 }
 
 /* Layout */
 .content {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 20px;
+  grid-template-columns: 240px 1fr;
+  gap: 10px;
 }
 
-/* Sidebar */
+/* Sidebar - phpMyAdmin Style */
 .sidebar {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #f3f3f3, #e8e8e8);
+  border: 1px solid #aaa;
+  border-radius: 0;
+  padding: 0;
   height: fit-content;
+  font-size: 13px;
 }
 
 .sidebar-section {
-  margin-bottom: 25px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
 }
 
 .sidebar-section h3 {
-  font-size: 1.1em;
-  margin-bottom: 12px;
-  color: #667eea;
-  border-bottom: 2px solid #667eea;
-  padding-bottom: 5px;
+  font-size: 12px;
+  margin: 0;
+  padding: 8px 10px;
+  color: #333;
+  background: linear-gradient(to bottom, #ddd, #c8c8c8);
+  border-bottom: 1px solid #aaa;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.sidebar-section h3:hover {
+  background: linear-gradient(to bottom, #e5e5e5, #d0d0d0);
+}
+
+.quick-actions {
+  padding: 10px;
+  background: #f9f9f9;
+}
+
+.quick-actions .btn {
+  width: 100%;
+  font-size: 12px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 3px;
+}
+
+.quick-actions .btn:last-child {
+  margin-bottom: 0;
+}
+
+.quick-actions .btn-primary {
+  background: linear-gradient(to bottom, #5a8bc1, #3d6a99);
+  border: 1px solid #2d5a89;
+}
+
+.quick-actions .btn-primary:hover {
+  background: linear-gradient(to bottom, #6a9bd1, #4d7aa9);
+  transform: none;
+  box-shadow: none;
+}
+
+.quick-actions .btn-secondary {
+  background: linear-gradient(to bottom, #f5f5f5, #ddd);
+  color: #333;
+  border: 1px solid #aaa;
+}
+
+.quick-actions .btn-secondary:hover {
+  background: linear-gradient(to bottom, #fff, #eee);
 }
 
 .table-list {
   list-style: none;
+  margin: 0;
+  padding: 5px 0;
+  background: #f9f9f9;
 }
 
 .table-list li {
-  padding: 8px 12px;
-  margin: 5px 0;
-  background: #f8f9fa;
-  border-radius: 6px;
+  padding: 4px 10px 4px 20px;
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.1s;
+  color: #235a81;
+  position: relative;
+}
+
+.table-list li::before {
+  content: "📋";
+  position: absolute;
+  left: 5px;
+  font-size: 11px;
 }
 
 .table-list li:hover {
-  background: #667eea;
-  color: white;
-  transform: translateX(5px);
+  background: #cde4f6;
+  color: #000;
+  transform: none;
+}
+
+.table-list li:active {
+  background: #a6cce8;
+}
+
+/* Example queries dropdown */
+.sidebar-section .select-full {
+  margin: 10px;
+  width: calc(100% - 20px);
+  font-size: 12px;
+  padding: 5px 8px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.sidebar-section .select-full:focus {
+  border-color: #5a8bc1;
+  outline: none;
+}
+
+/* Tables list container */
+#tables-list {
+  background: #f9f9f9;
+  padding: 5px 0;
+}
+
+#tables-list .text-muted {
+  padding: 8px 10px;
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
 }
 
 /* Main Content */
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 
+/* Card - phpMyAdmin Style */
 .card {
   background: white;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  padding: 0;
+  border: 1px solid #aaa;
+  box-shadow: none;
 }
 
 .card h2 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-  color: #667eea;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0;
+  padding: 8px 12px;
+  color: #333;
+  background: linear-gradient(to bottom, #ddd, #c8c8c8);
+  border-bottom: 1px solid #aaa;
 }
 
 .card h3 {
-  font-size: 1.2em;
-  margin-top: 20px;
+  font-size: 13px;
+  margin-top: 15px;
   margin-bottom: 10px;
-  color: #555;
+  color: #333;
+  font-weight: bold;
 }
 
-/* SQL Input */
+/* Card with tabs - remove duplicate borders */
+.card .tabs {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #aaa;
+}
+
+.card .tab-content {
+  border: none;
+  border-top: none;
+}
+
+/* Results container padding */
+#results-container {
+  padding: 10px 12px;
+}
+
+#results-container .text-muted {
+  font-size: 13px;
+  color: #666;
+}
+
+/* SQL Query Panel - phpMyAdmin Style */
+.query-panel {
+  border: 1px solid #ddd;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.query-panel-header {
+  background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.query-panel-header h2 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+/* SQL Input - hidden when CodeMirror is active */
 #sql-input {
   width: 100%;
   padding: 15px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
+  border: none;
+  border-bottom: 1px solid #ddd;
   font-family: "Courier New", monospace;
   font-size: 14px;
   resize: vertical;
   transition: border-color 0.2s;
+  border-radius: 0;
 }
 
 #sql-input:focus {
   outline: none;
-  border-color: #667eea;
+  background: #fffef8;
+}
+
+/* CodeMirror wrapper in query panel */
+.query-panel .CodeMirror {
+  border-bottom: 1px solid #ddd;
+  font-size: 13px;
+}
+
+/* Query Toolbar - phpMyAdmin Style */
+.query-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: linear-gradient(to bottom, #f9f9f9, #f0f0f0);
+  border-top: 1px solid #e0e0e0;
+}
+
+.query-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+
+/* Go Button - phpMyAdmin Style */
+.btn-go {
+  background: linear-gradient(to bottom, #f7941d, #f15a24);
+  color: white;
+  font-weight: bold;
+  padding: 8px 24px;
+  border: 1px solid #d35400;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.btn-go:hover {
+  background: linear-gradient(to bottom, #f9a53d, #f36b35);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Buttons */
@@ -171,239 +394,599 @@ header h1 {
 
 .button-group {
   display: flex;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 10px;
   flex-wrap: wrap;
 }
 
-/* Status Text */
+/* Tab content button group - filter buttons */
+.tab-content .button-group {
+  margin: 0 0 15px 0;
+  padding: 10px;
+  background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+  border-bottom: 1px solid #ccc;
+  margin: -15px -15px 15px -15px;
+}
+
+.tab-content .button-group .btn-secondary {
+  background: linear-gradient(to bottom, #f5f5f5, #ddd);
+  color: #333;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 5px 12px;
+  margin-bottom: 0;
+}
+
+.tab-content .button-group .btn-secondary:hover {
+  background: linear-gradient(to bottom, #fff, #eee);
+}
+
+/* Status Text - phpMyAdmin Style */
 .status-text {
-  font-size: 14px;
-  padding: 5px 10px;
-  border-radius: 4px;
+  font-size: 12px;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+}
+
+/* Only show styling when status text has content */
+.status-text:empty {
+  display: none;
 }
 
 .status-success {
-  background: #d4edda;
-  color: #155724;
+  display: inline-block;
+  padding: 4px 8px;
+  background: linear-gradient(to bottom, #dff0d8, #c8e5bc);
+  border: 1px solid #3c763d;
+  color: #3c763d;
+}
+
+.status-success::before {
+  content: "✓ ";
+  font-weight: bold;
 }
 
 .status-error {
-  background: #f8d7da;
-  color: #721c24;
+  display: inline-block;
+  padding: 4px 8px;
+  background: linear-gradient(to bottom, #f2dede, #e7c3c3);
+  border: 1px solid #a94442;
+  color: #a94442;
+}
+
+.status-error::before {
+  content: "✗ ";
+  font-weight: bold;
 }
 
 .status-loading {
-  background: #d1ecf1;
-  color: #0c5460;
+  display: inline-block;
+  padding: 4px 8px;
+  background: linear-gradient(to bottom, #d9edf7, #bce8f1);
+  border: 1px solid #31708f;
+  color: #31708f;
 }
 
-/* Results Table */
+.status-loading::before {
+  content: "⟳ ";
+}
+
+/* Results Table - phpMyAdmin Style */
 .results-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
+  border: 1px solid #aaa;
+  font-size: 13px;
 }
 
 .results-table th,
 .results-table td {
-  padding: 12px;
+  padding: 5px 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #bbb;
+  vertical-align: top;
 }
 
 .results-table th {
-  background: #667eea;
-  color: white;
-  font-weight: 600;
+  background: linear-gradient(to bottom, #f5f5f5, #d8d8d8);
+  color: #333;
+  font-weight: bold;
+  white-space: nowrap;
+  border-bottom: 2px solid #aaa;
+  position: sticky;
+  top: 0;
 }
 
-.results-table tr:hover {
-  background: #f8f9fa;
+.results-table th a {
+  color: #235a81;
+  text-decoration: none;
 }
 
-/* Message Boxes */
-.success-box,
-.error-box {
-  padding: 15px;
-  border-radius: 8px;
+.results-table th a:hover {
+  text-decoration: underline;
+}
+
+.results-table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+
+.results-table tbody tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+.results-table tbody tr:hover {
+  background: #cfc;
+}
+
+.results-table td.null-value {
+  color: #999;
+  font-style: italic;
+}
+
+/* Results container wrapper */
+.results-wrapper {
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
   margin-top: 10px;
 }
 
+.results-wrapper .results-table {
+  margin-top: 0;
+  border: none;
+}
+
+/* Results info bar */
+.results-info {
+  background: linear-gradient(to bottom, #f9f9f9, #e8e8e8);
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  font-size: 12px;
+  color: #333;
+}
+
+.results-info strong {
+  color: #000;
+}
+
+/* Schema Panel - phpMyAdmin Style */
+.schema-panel {
+  border: 1px solid #aaa;
+  margin: 0;
+}
+
+.schema-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  border-bottom: 1px solid #aaa;
+  font-size: 13px;
+}
+
+.schema-header strong {
+  color: #333;
+}
+
+.schema-icon {
+  font-size: 16px;
+}
+
+.schema-table td:first-child {
+  text-align: center;
+  color: #666;
+  width: 30px;
+}
+
+.schema-table td strong {
+  color: #235a81;
+}
+
+.schema-footer {
+  padding: 8px 12px;
+  background: linear-gradient(to bottom, #f9f9f9, #eee);
+  border-top: 1px solid #ccc;
+  font-size: 12px;
+  color: #555;
+}
+
+/* Key badges */
+.key-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 0;
+  border: 1px solid;
+}
+
+.key-pri {
+  background: linear-gradient(to bottom, #fcf8e3, #f7ecb5);
+  border-color: #8a6d3b;
+  color: #8a6d3b;
+}
+
+.key-uni {
+  background: linear-gradient(to bottom, #d9edf7, #bce8f1);
+  border-color: #31708f;
+  color: #31708f;
+}
+
+/* Message Boxes - phpMyAdmin Style */
+.success-box,
+.error-box,
+.info-box {
+  padding: 10px 12px 10px 40px;
+  border-radius: 0;
+  margin: 10px 0;
+  font-size: 13px;
+  position: relative;
+  border: 1px solid;
+}
+
+.success-box::before,
+.error-box::before,
+.info-box::before {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .success-box {
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
-  color: #155724;
+  background: linear-gradient(to bottom, #dff0d8, #c8e5bc);
+  border-color: #3c763d;
+  color: #3c763d;
+}
+
+.success-box::before {
+  content: "✓";
+  color: #3c763d;
 }
 
 .error-box {
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
+  background: linear-gradient(to bottom, #f2dede, #e7c3c3);
+  border-color: #a94442;
+  color: #a94442;
 }
 
-/* Tabs */
+.error-box::before {
+  content: "✗";
+  color: #a94442;
+}
+
+.info-box {
+  background: linear-gradient(to bottom, #d9edf7, #bce8f1);
+  border-color: #31708f;
+  color: #31708f;
+}
+
+.info-box::before {
+  content: "ℹ";
+  color: #31708f;
+}
+
+/* Alert messages with icons */
+.alert {
+  padding: 10px 12px 10px 40px;
+  margin: 10px 0;
+  font-size: 13px;
+  position: relative;
+  border: 1px solid;
+  border-radius: 0;
+}
+
+.alert-success {
+  background: linear-gradient(to bottom, #dff0d8, #c8e5bc);
+  border-color: #3c763d;
+  color: #3c763d;
+}
+
+.alert-danger {
+  background: linear-gradient(to bottom, #f2dede, #e7c3c3);
+  border-color: #a94442;
+  color: #a94442;
+}
+
+.alert-warning {
+  background: linear-gradient(to bottom, #fcf8e3, #f7ecb5);
+  border-color: #8a6d3b;
+  color: #8a6d3b;
+}
+
+.alert-info {
+  background: linear-gradient(to bottom, #d9edf7, #bce8f1);
+  border-color: #31708f;
+  color: #31708f;
+}
+
+/* Tabs - phpMyAdmin Style */
 .tabs {
   display: flex;
-  gap: 10px;
-  border-bottom: 2px solid #ddd;
-  margin-bottom: 20px;
+  gap: 2px;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0;
+  background: linear-gradient(to bottom, #f5f5f5, #ddd);
+  padding: 5px 5px 0 5px;
 }
 
 .tab-button {
-  padding: 10px 20px;
-  background: transparent;
-  border: none;
-  border-bottom: 3px solid transparent;
+  padding: 8px 16px;
+  background: linear-gradient(to bottom, #e8e8e8, #d0d0d0);
+  border: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  border-radius: 4px 4px 0 0;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  color: #666;
-  transition: all 0.2s;
+  font-size: 13px;
+  font-weight: normal;
+  color: #333;
+  transition: background 0.1s;
+  margin-bottom: -1px;
 }
 
 .tab-button:hover {
-  color: #667eea;
+  background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+  color: #000;
 }
 
 .tab-button.active {
-  color: #667eea;
-  border-bottom-color: #667eea;
+  background: #fff;
+  border-bottom-color: #fff;
+  color: #000;
+  font-weight: bold;
 }
 
 .tab-content {
   display: none;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-top: none;
+  padding: 15px;
 }
 
 .tab-content.active {
   display: block;
 }
 
-/* Forms */
+/* Forms - phpMyAdmin Style */
 .form {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  background: #f9f9f9;
+  padding: 0;
+  border-radius: 0;
+  margin-bottom: 15px;
+  border: 1px solid #aaa;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+.form-group:last-of-type {
+  border-bottom: none;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: #555;
+  width: 140px;
+  min-width: 140px;
+  padding: 8px 12px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 13px;
+  color: #333;
+  background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+  border-right: 1px solid #ddd;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
 }
 
 .form-group input,
 .form-group textarea,
-.form-group select,
-.select-full {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
+.form-group select {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 13px;
+  margin: 8px 12px;
+  background: #fff;
+}
+
+.form-group textarea {
+  min-height: 60px;
+  resize: vertical;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
-.form-group select:focus,
-.select-full:focus {
+.form-group select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #5a8bc1;
+  background: #fffef8;
 }
 
-/* Data Lists */
+.form .btn {
+  margin: 10px 12px;
+  font-size: 12px;
+  padding: 6px 16px;
+}
+
+.form .btn-primary {
+  background: linear-gradient(to bottom, #5a8bc1, #3d6a99);
+  border: 1px solid #2d5a89;
+  border-radius: 3px;
+}
+
+.form .btn-primary:hover {
+  background: linear-gradient(to bottom, #6a9bd1, #4d7aa9);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Form section headers */
+.tab-content h3 {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  margin: 15px 0 10px 0;
+  padding: 6px 10px;
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  border: 1px solid #aaa;
+  border-radius: 3px 3px 0 0;
+}
+
+.tab-content h3:first-child {
+  margin-top: 0;
+}
+
+/* Data Lists - phpMyAdmin Style */
 .data-list {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .user-cards,
 .task-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 15px;
-  margin-top: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .user-card,
 .task-card {
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #667eea;
+  padding: 0;
+  background: #fff;
+  border-radius: 0;
+  border: 1px solid #aaa;
+  font-size: 13px;
 }
 
 .user-card strong,
 .task-card strong {
   display: block;
-  margin-bottom: 5px;
+  padding: 6px 10px;
+  margin: 0;
+  color: #333;
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  border-bottom: 1px solid #aaa;
+  font-size: 13px;
+}
+
+.user-card .card-body,
+.task-card .card-body {
+  padding: 8px 10px;
+}
+
+.user-card p,
+.task-card p {
+  margin: 4px 0;
+  padding: 0;
   color: #333;
 }
 
+.user-card span,
+.task-card span {
+  color: #235a81;
+}
+
 .task-card {
-  border-left-color: #ffc107;
+  border-left: 3px solid #31708f;
 }
 
 .task-card.pending {
-  border-left-color: #17a2b8;
+  border-left-color: #31708f;
 }
 
 .task-card.in_progress {
-  border-left-color: #ffc107;
+  border-left-color: #8a6d3b;
 }
 
 .task-card.completed {
-  border-left-color: #28a745;
-  opacity: 0.8;
+  border-left-color: #3c763d;
+  background: #f9f9f9;
 }
 
 .task-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 6px 10px;
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+}
+
+.task-header strong {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.task-body {
+  padding: 8px 10px;
 }
 
 .task-body p {
-  margin: 10px 0;
-  color: #666;
+  margin: 4px 0;
+  color: #555;
+  font-size: 12px;
 }
 
 .task-meta {
   display: flex;
-  gap: 15px;
-  font-size: 0.9em;
-  color: #888;
-  margin-top: 10px;
+  gap: 12px;
+  font-size: 11px;
+  color: #666;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
 }
 
+.task-meta span {
+  color: #555;
+}
+
+/* Badge - phpMyAdmin Style */
 .badge {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75em;
-  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 0;
+  font-size: 11px;
+  font-weight: bold;
   text-transform: uppercase;
+  border: 1px solid;
 }
 
 .badge.pending {
-  background: #d1ecf1;
-  color: #0c5460;
+  background: linear-gradient(to bottom, #d9edf7, #bce8f1);
+  border-color: #31708f;
+  color: #31708f;
 }
 
 .badge.in_progress {
-  background: #fff3cd;
+  background: linear-gradient(to bottom, #fcf8e3, #f7ecb5);
+  border-color: #8a6d3b;
   color: #856404;
 }
 
 .badge.completed {
-  background: #d4edda;
-  color: #155724;
+  background: linear-gradient(to bottom, #dff0d8, #c8e5bc);
+  border-color: #3c763d;
+  color: #3c763d;
 }
 
 /* Utility Classes */
@@ -416,17 +999,55 @@ header h1 {
 }
 
 .error-text {
-  color: #dc3545;
+  color: #a94442;
+  font-size: 13px;
 }
 
-/* Footer */
+.success-text {
+  color: #3c763d;
+  font-size: 13px;
+}
+
+.warning-text {
+  color: #8a6d3b;
+  font-size: 13px;
+}
+
+/* Footer - phpMyAdmin Style */
 footer {
-  text-align: center;
-  color: white;
-  padding: 20px;
-  margin-top: 30px;
-  font-size: 0.9em;
-  opacity: 0.9;
+  background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
+  border: 1px solid #aaa;
+  border-radius: 0;
+  margin: 15px -20px -20px -20px;
+  padding: 10px 15px;
+  font-size: 11px;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer a {
+  color: #235a81;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-links a {
+  color: #235a81;
+  font-size: 11px;
 }
 
 /* Responsive Design */
@@ -439,8 +1060,26 @@ footer {
     order: 2;
   }
 
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 10px 15px;
+  }
+
   header h1 {
-    font-size: 2em;
+    font-size: 16px;
+    padding: 0;
+  }
+
+  .subtitle {
+    padding: 0;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
   }
 
   .user-cards,

@@ -1,0 +1,201 @@
+/**
+ * CodeMirror Custom Theme - phpMyAdmin Style
+ */
+
+/* Editor Container */
+.CodeMirror {
+  font-family: "Courier New", Consolas, Monaco, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  height: auto;
+  min-height: 120px;
+  max-height: 300px;
+  border: none;
+  background: #fff;
+}
+
+.CodeMirror-scroll {
+  min-height: 120px;
+  max-height: 300px;
+}
+
+/* Gutter (line numbers) */
+.CodeMirror-gutters {
+  background: linear-gradient(to right, #f5f5f5, #e8e8e8);
+  border-right: 1px solid #ccc;
+}
+
+.CodeMirror-linenumber {
+  color: #666;
+  font-size: 11px;
+  padding: 0 8px 0 5px;
+}
+
+/* Cursor */
+.CodeMirror-cursor {
+  border-left: 2px solid #333;
+}
+
+/* Selection */
+.CodeMirror-selected {
+  background: #cde4f6 !important;
+}
+
+.CodeMirror-focused .CodeMirror-selected {
+  background: #b5d5ff !important;
+}
+
+/* Active Line */
+.CodeMirror-activeline-background {
+  background: #fffef0;
+}
+
+/* Matching Brackets */
+.CodeMirror-matchingbracket {
+  background: #cfc;
+  color: #000 !important;
+  font-weight: bold;
+}
+
+.CodeMirror-nonmatchingbracket {
+  background: #fcc;
+  color: #a00 !important;
+}
+
+/* SQL Syntax Highlighting - phpMyAdmin Style */
+
+/* Keywords (SELECT, FROM, WHERE, etc.) */
+.cm-keyword {
+  color: #7f0055;
+  font-weight: bold;
+}
+
+/* Operators (=, <, >, etc.) */
+.cm-operator {
+  color: #000;
+}
+
+/* Numbers */
+.cm-number {
+  color: #164;
+}
+
+/* Strings */
+.cm-string {
+  color: #080;
+}
+
+/* String-2 (backtick identifiers) */
+.cm-string-2 {
+  color: #b11;
+}
+
+/* Variables */
+.cm-variable {
+  color: #000;
+}
+
+/* Variable-2 (table.column format) */
+.cm-variable-2 {
+  color: #235a81;
+}
+
+/* Comments */
+.cm-comment {
+  color: #808080;
+  font-style: italic;
+}
+
+/* Built-in functions */
+.cm-builtin {
+  color: #7f0055;
+}
+
+/* Atoms (NULL, TRUE, FALSE) */
+.cm-atom {
+  color: #905;
+}
+
+/* Punctuation */
+.cm-punctuation {
+  color: #000;
+}
+
+/* Brackets */
+.cm-bracket {
+  color: #000;
+}
+
+/* Error */
+.cm-error {
+  color: #f00;
+  text-decoration: underline;
+}
+
+/* Placeholder text */
+.CodeMirror-placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* Scrollbar styling */
+.CodeMirror-vscrollbar,
+.CodeMirror-hscrollbar {
+  outline: none;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar,
+.CodeMirror-hscrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar-track,
+.CodeMirror-hscrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
+.CodeMirror-hscrollbar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 0;
+}
+
+.CodeMirror-vscrollbar::-webkit-scrollbar-thumb:hover,
+.CodeMirror-hscrollbar::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Focus state */
+.CodeMirror-focused {
+  outline: none;
+}
+
+/* Query panel adjustments */
+.query-panel .CodeMirror {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Hint autocomplete dropdown */
+.CodeMirror-hints {
+  font-family: "Courier New", Consolas, Monaco, monospace;
+  font-size: 12px;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.CodeMirror-hint {
+  padding: 4px 8px;
+  color: #333;
+  cursor: pointer;
+}
+
+.CodeMirror-hint-active {
+  background: #cde4f6;
+  color: #000;
+}

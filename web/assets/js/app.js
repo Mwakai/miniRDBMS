@@ -4,6 +4,9 @@
 
 const API_URL = "api.php";
 
+// CodeMirror editor instance
+let sqlEditor = null;
+
 // Example queries
 const EXAMPLE_QUERIES = {
   "select-users": "SELECT * FROM users",
@@ -22,15 +25,71 @@ const EXAMPLE_QUERIES = {
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
+  initSqlEditor();
   refreshTables();
   loadUsers();
 });
 
 /**
+ * Initialize CodeMirror SQL editor
+ */
+function initSqlEditor() {
+  const textarea = document.getElementById("sql-input");
+
+  sqlEditor = CodeMirror.fromTextArea(textarea, {
+    mode: "text/x-mysql",
+    theme: "default",
+    lineNumbers: true,
+    lineWrapping: true,
+    indentWithTabs: true,
+    smartIndent: true,
+    tabSize: 4,
+    indentUnit: 4,
+    autofocus: false,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    placeholder: "Enter your SQL query here...\neg: SELECT * FROM users;",
+    extraKeys: {
+      "Ctrl-Enter": function(cm) {
+        executeQuery();
+      },
+      "Cmd-Enter": function(cm) {
+        executeQuery();
+      }
+    }
+  });
+
+  // Set initial height
+  sqlEditor.setSize(null, "auto");
+}
+
+/**
+ * Get SQL from editor
+ */
+function getSql() {
+  if (sqlEditor) {
+    return sqlEditor.getValue().trim();
+  }
+  return document.getElementById("sql-input").value.trim();
+}
+
+/**
+ * Set SQL in editor
+ */
+function setSql(sql) {
+  if (sqlEditor) {
+    sqlEditor.setValue(sql);
+    sqlEditor.focus();
+  } else {
+    document.getElementById("sql-input").value = sql;
+  }
+}
+
+/**
  * Execute SQL query via API
  */
 async function executeQuery() {
-  const sql = document.getElementById("sql-input").value.trim();
+  const sql = getSql();
   const statusEl = document.getElementById("query-status");
   const resultsEl = document.getElementById("results-container");
 
@@ -86,15 +145,22 @@ function displayResults(result) {
 
   if (result.type === "SELECT" && result.rows) {
     if (result.rows.length === 0) {
-      resultsEl.innerHTML = '<p class="text-muted">Query returned no rows.</p>';
+      resultsEl.innerHTML = `
+        <div class="results-info">
+          <strong>MySQL returned an empty result set (i.e. zero rows).</strong>
+        </div>`;
       return;
     }
 
     const table = createTable(result.rows);
     resultsEl.innerHTML = `
-            <p><strong>${result.rowCount} row(s) returned</strong></p>
-            ${table}
-        `;
+      <div class="results-info">
+        Showing rows <strong>0 - ${result.rowCount - 1}</strong> (${result.rowCount} total, Query took ${result.durationMs} ms)
+      </div>
+      <div class="results-wrapper">
+        ${table}
+      </div>
+    `;
   } else {
     resultsEl.innerHTML = `
             <div class="success-box">
@@ -126,9 +192,11 @@ function createTable(rows) {
   rows.forEach((row) => {
     html += "<tr>";
     columns.forEach((col) => {
-      const value =
-        row[col] === null ? "<em>NULL</em>" : escapeHtml(String(row[col]));
-      html += `<td>${value}</td>`;
+      if (row[col] === null) {
+        html += `<td class="null-value">NULL</td>`;
+      } else {
+        html += `<td>${escapeHtml(String(row[col]))}</td>`;
+      }
     });
     html += "</tr>";
   });
@@ -164,40 +232,89 @@ async function refreshTables() {
 }
 
 /**
- * Show table schema
+ * Show table schema in results panel (phpMyAdmin style)
  */
 async function showTableSchema(tableName) {
+  const resultsEl = document.getElementById("results-container");
+  const statusEl = document.getElementById("query-status");
+
+  statusEl.textContent = "Loading structure...";
+  statusEl.className = "status-text status-loading";
+
   try {
     const response = await fetch(`${API_URL}?action=schema&table=${tableName}`);
     const result = await response.json();
 
     if (result.success) {
       const schema = result.schema;
-      let info = `Table: ${schema.name}\n\nColumns:\n`;
+      const columns = Object.entries(schema.columns);
 
-      for (const [colName, colDef] of Object.entries(schema.columns)) {
+      statusEl.textContent = `Structure of table "${tableName}"`;
+      statusEl.className = "status-text status-success";
+
+      let html = `
+        <div class="schema-panel">
+          <div class="schema-header">
+            <span class="schema-icon">📋</span>
+            <strong>Structure of table "${escapeHtml(schema.name)}"</strong>
+          </div>
+          <div class="results-wrapper">
+            <table class="results-table schema-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Column</th>
+                  <th>Type</th>
+                  <th>Null</th>
+                  <th>Key</th>
+                  <th>Default</th>
+                  <th>Extra</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+      columns.forEach(([colName, colDef], index) => {
         let type = colDef.type;
         if (type === "VARCHAR" && colDef.length) {
           type += `(${colDef.length})`;
         }
 
-        const constraints = [];
-        if (colDef.primaryKey) constraints.push("PK");
-        if (colDef.unique) constraints.push("UNIQUE");
-        if (!colDef.nullable) constraints.push("NOT NULL");
-        if (colDef.autoIncrement) constraints.push("AUTO_INCREMENT");
+        const isNull = colDef.nullable ? "Yes" : "No";
+        const key = colDef.primaryKey ? "PRI" : colDef.unique ? "UNI" : "";
+        const defaultVal = colDef.default !== undefined ? colDef.default : '<span class="null-value">NULL</span>';
+        const extra = colDef.autoIncrement ? "auto_increment" : "";
 
-        info += `  ${colName}: ${type}`;
-        if (constraints.length) {
-          info += ` [${constraints.join(", ")}]`;
-        }
-        info += "\n";
-      }
+        html += `
+          <tr>
+            <td>${index + 1}</td>
+            <td><strong>${escapeHtml(colName)}</strong></td>
+            <td>${escapeHtml(type.toLowerCase())}</td>
+            <td>${isNull}</td>
+            <td>${key ? `<span class="key-badge key-${key.toLowerCase()}">${key}</span>` : ""}</td>
+            <td>${defaultVal}</td>
+            <td>${extra}</td>
+          </tr>`;
+      });
 
-      alert(info);
+      html += `
+              </tbody>
+            </table>
+          </div>
+          <div class="schema-footer">
+            ${columns.length} column(s)
+          </div>
+        </div>`;
+
+      resultsEl.innerHTML = html;
+    } else {
+      statusEl.textContent = `Error: ${result.error}`;
+      statusEl.className = "status-text status-error";
+      resultsEl.innerHTML = `<div class="error-box">${result.error}</div>`;
     }
   } catch (error) {
-    alert(`Error loading schema: ${error.message}`);
+    statusEl.textContent = `Error: ${error.message}`;
+    statusEl.className = "status-text status-error";
+    resultsEl.innerHTML = `<div class="error-box">Error loading schema: ${error.message}</div>`;
   }
 }
 
@@ -206,7 +323,7 @@ async function showTableSchema(tableName) {
  */
 function loadExampleQuery(key) {
   if (key && EXAMPLE_QUERIES[key]) {
-    document.getElementById("sql-input").value = EXAMPLE_QUERIES[key];
+    setSql(EXAMPLE_QUERIES[key]);
   }
 }
 
@@ -214,8 +331,9 @@ function loadExampleQuery(key) {
  * Clear query input
  */
 function clearQuery() {
-  document.getElementById("sql-input").value = "";
+  setSql("");
   document.getElementById("query-status").textContent = "";
+  document.getElementById("query-status").className = "status-text";
   document.getElementById("results-container").innerHTML =
     '<p class="text-muted">Execute a query to see results here...</p>';
 }

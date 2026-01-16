@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>miniRDBMS - Task Management Demo</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- CodeMirror for SQL syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.css">
+    <link rel="stylesheet" href="assets/css/codemirror-custom.css">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <h1>RDBMS</h1>
-            <p class="subtitle">Task Management System Demo</p>
+            <h1>miniRDBMS</h1>
+            <p class="subtitle">Server: localhost » Database: miniRDBMS</p>
         </header>
 
         <div class="content">
@@ -53,14 +56,18 @@
             <!-- Main Content -->
             <main class="main-content">
                 <!-- SQL Query Editor -->
-                <section class="card">
-                    <h2>SQL Query Editor</h2>
+                <section class="card query-panel">
+                    <div class="query-panel-header">
+                        <h2>SQL Query Editor</h2>
+                    </div>
                     <textarea id="sql-input" placeholder="Enter your SQL query here...&#10;eg: SELECT * FROM users;"
                         rows="6"></textarea>
-                    <div class="button-group">
-                        <button onclick="executeQuery()" class="btn btn-primary">Execute Query</button>
-                        <button onclick="clearQuery()" class="btn btn-secondary">Clear</button>
+                    <div class="query-toolbar">
                         <span id="query-status" class="status-text"></span>
+                        <div class="query-actions">
+                            <button onclick="clearQuery()" class="btn btn-secondary">Clear</button>
+                            <button onclick="executeQuery()" class="btn btn-go">Go</button>
+                        </div>
                     </div>
                 </section>
 
@@ -154,10 +161,16 @@
         </div>
 
         <footer>
-            <p>&copy; 2026 miniRDBMS - A Simple PHP-Based Relational Database Management System</p>
+            <p>miniRDBMS v1.0.0 · PHP-Based Relational Database Management System</p>
+            <div class="footer-links">
+                <a href="docs.php">Documentation</a>
+            </div>
         </footer>
     </div>
 
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/sql/sql.min.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
 
